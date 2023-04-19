@@ -1,6 +1,12 @@
+body {
+    margin: 0;
+    height: 100vh;
+}
+
 .container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .container .title {
@@ -15,13 +21,14 @@
 .grid-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    width: 580px;
+    border: 3px solid #3e2e42;
+    border-radius: 2px;
 }
 
 .grid-container div {
-    border: 1px solid black;
-    height: 23px;
-    width: 23px;
-    margin: 0;
+    border: 1px solid #e8e8e6;
 }
 
 .grid-container div.hovered {
@@ -33,4 +40,5 @@
     width: 0;
     height: 0;
     border: none;
+    display: none;
 }
