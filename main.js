@@ -1,4 +1,5 @@
 // function creates a 16*16 grid (in combination with css) of square divs inside a grid container
+// Use div with break class to break one line after n squares if dimensions are n*n
 function createGrid() {
     for (let i = 0; i < 16; i++) {
         for (let j = 0; j < 16; j++) {
@@ -6,6 +7,9 @@ function createGrid() {
             div.className = "square";
             gridContainer.appendChild(div);
         }
+        const br = document.createElement('div');
+        br.className = "break";
+        gridContainer.appendChild(br);
     }
 }
 
