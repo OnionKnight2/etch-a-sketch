@@ -5,10 +5,10 @@ const DEFAULT_SQUARE_NUMBER = 16;
 // function creates a 16*16 grid (in combination with css) of square divs inside a grid container
 // Use div with break class to break one line after n squares if dimensions are n*n
 // Calculate width and height of a single square based on total width of a grid-container and border sizes
-function createGrid() {
-    const squareSize = GRID_CONTAINER_WIDTH / DEFAULT_SQUARE_NUMBER - BORDER_SIZE;
-    for (let i = 0; i < DEFAULT_SQUARE_NUMBER; i++) {
-        for (let j = 0; j < DEFAULT_SQUARE_NUMBER; j++) {
+function createGrid(squareNum) {
+    const squareSize = GRID_CONTAINER_WIDTH / squareNum - BORDER_SIZE;
+    for (let i = 0; i < squareNum; i++) {
+        for (let j = 0; j < squareNum; j++) {
             const div = document.createElement('div');        
             div.className = "square";
             div.style.height = `${squareSize}px`;
@@ -52,7 +52,7 @@ function createResetBtn() {
 // Reset hovered squares to default condition
 function resetGrid(e) {
     const hoveredSquares = document.querySelectorAll('.hovered');
-    document.querySelector('.choice-range').value = DEFAULT_SQUARE_NUMBER;
+    const output = document.querySelector('.output');
     hoveredSquares.forEach((square) => square.classList.remove('hovered'));
 }
 
@@ -73,7 +73,8 @@ function createChoice() {
     choiceRange.step = 1;
     choiceRange.value = DEFAULT_SQUARE_NUMBER;
     label.for = "choiceRange";
-    label.textContent = "Select number of squares:";
+    label.className = "label";
+    label.textContent = "Select number of squares per row:";
     output.className = "output";
     output.textContent = DEFAULT_SQUARE_NUMBER;
 
@@ -82,11 +83,46 @@ function createChoice() {
     rangeContainer.appendChild(choiceDiv);
     choiceDiv.appendChild(choiceRange);
     choiceDiv.appendChild(output);
+
+    chooseSquares();
+}
+
+// function will change number of squares based on range input.
+// It will actually call another function to do that
+function chooseSquares() {
+    const input = document.querySelector('.choice-range');
+
+    input.addEventListener('input', makeChanges);
+}
+
+// Function wil do changes that event triggers
+// Value of the output will follow input value
+// Based on entered input, squares will be bigger or smaller
+function makeChanges(e) {
+    const output = document.querySelector('.output');
+    const squares = document.querySelectorAll('.square');
+    const breaks = document.querySelectorAll('.break');
+
+    output.textContent = e.target.value;
+
+    deleteGrid(squares, breaks);
+    createGrid(e.target.value);
+    checkHover();
+}
+
+// This function will delete all squares so the new one can be generated
+function deleteGrid(squares, breaks) {
+    squares.forEach((square) => {
+        square.remove();
+    });
+    breaks.forEach((br) => {
+        br.remove();
+    });
 }
 
 const gridContainer = document.querySelector('.grid-container');
 const optionsContainer = document.querySelector('.options-container');
-createGrid();
+createGrid(DEFAULT_SQUARE_NUMBER);
 checkHover();
 createResetBtn();
 createChoice();
