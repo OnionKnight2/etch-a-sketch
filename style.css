@@ -56,10 +56,15 @@ body {
 .options-container .output {
     background-color: #240636;
     border-radius: 2px;
-    padding: 3px;
+    padding: 3px 6px;
     color: #e8e8e6;
     font-size: 14px;
     font-weight: bold;
+}
+
+.options-container .label {
+    font-size: 18px;
+    color: #240636;
 }
 
 .grid-container {
