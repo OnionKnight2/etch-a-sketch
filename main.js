@@ -1,4 +1,4 @@
-const GRID_CONTAINER_WIDTH = 520;
+const GRID_CONTAINER_WIDTH = 500;
 const BORDER_SIZE = 2;
 const DEFAULT_SQUARE_NUMBER = 16;
 
@@ -42,6 +42,7 @@ function createResetBtn() {
     reset.className = "reset";
     resetBtn.className = "reset-btn";
     resetBtn.textContent = "Reset";
+
     optionsContainer.appendChild(reset);
     reset.appendChild(resetBtn);
 
@@ -51,15 +52,36 @@ function createResetBtn() {
 // Reset hovered squares to default condition
 function resetGrid(e) {
     const hoveredSquares = document.querySelectorAll('.hovered');
+    document.querySelector('.choice-range').value = DEFAULT_SQUARE_NUMBER;
     hoveredSquares.forEach((square) => square.classList.remove('hovered'));
 }
 
 // function will create a possibility of choosing number of squares in a row
+// It will use range input type, defined by min, max, step, value output and with a label
 function createChoice() {
-    const choice = document.createElement('div');
-    choice.className = "choice";
-    choice.textContent = "Select number of squares";
-    optionsContainer.appendChild(choice);
+    const rangeContainer = document.createElement('div');
+    const choiceDiv = document.createElement('div');
+    const choiceRange = document.createElement('input');
+    const label = document.createElement('label');
+    const output = document.createElement('output');
+    rangeContainer.className = "choice-container";
+    choiceDiv.className = "choice-div"
+    choiceRange.className = "choice-range";
+    choiceRange.type = "range";
+    choiceRange.min = 1;
+    choiceRange.max = 100;
+    choiceRange.step = 1;
+    choiceRange.value = DEFAULT_SQUARE_NUMBER;
+    label.for = "choiceRange";
+    label.textContent = "Select number of squares:";
+    output.className = "output";
+    output.textContent = DEFAULT_SQUARE_NUMBER;
+
+    optionsContainer.appendChild(rangeContainer);
+    rangeContainer.appendChild(label);
+    rangeContainer.appendChild(choiceDiv);
+    choiceDiv.appendChild(choiceRange);
+    choiceDiv.appendChild(output);
 }
 
 const gridContainer = document.querySelector('.grid-container');
