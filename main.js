@@ -22,12 +22,14 @@ function createGrid(squareNum) {
 }
 
 // function checks if there is a hover effect on the square grids
+// Also check if user first clicked onto a grid
 function checkHover() {
     const squares = document.querySelectorAll('.square');
-    squares.forEach((square) => {
-        square.addEventListener('mouseover', changeColor)
+    gridContainer.addEventListener('click', () => {
+        squares.forEach((square) => {
+            square.addEventListener('mouseover', changeColor);
+        });
     });
-
 }
 
 // function changes div's color if it is hovered over
@@ -52,8 +54,14 @@ function createResetBtn() {
 // Reset hovered squares to default condition
 function resetGrid(e) {
     const hoveredSquares = document.querySelectorAll('.hovered');
-    const output = document.querySelector('.output');
-    hoveredSquares.forEach((square) => square.classList.remove('hovered'));
+    //hoveredSquares.forEach((square) => square.classList.remove('hovered'));
+    const squares = document.querySelectorAll('.square');
+    const breaks = document.querySelectorAll('.break');
+    const input = document.querySelector('input');
+
+    deleteGrid(squares, breaks)
+    createGrid(input.value);
+    checkHover();
 }
 
 // function will create a possibility of choosing number of squares in a row
