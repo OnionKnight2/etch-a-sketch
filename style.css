@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 8px;
 }
 
 .container .title {
@@ -16,13 +17,29 @@ body {
 
 .options-container {
     display: flex;
+    gap: 120px;
+}
+
+.options-container .reset-btn {
+    background-color: #240636;
+    border: none;
+    width: 80px;
+    height: 30px;
+    border-radius: 8px;
+    color: #e8e8e6;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.options-container .reset-btn:hover {
+    background-color: rebeccapurple;
 }
 
 .grid-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 580px;
+    width: 520px;
     border: 3px solid #3e2e42;
     border-radius: 2px;
 }
