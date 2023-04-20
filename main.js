@@ -33,8 +33,14 @@ function checkHover() {
 }
 
 // function changes div's color if it is hovered over
+// Each mouse pass will generate a random rgb value and appoint it to the square
 function changeColor(e) {
-    e.target.classList.add("hovered");
+    
+    const randomR = Math.floor(Math.random() * 256);
+    const randomG = Math.floor(Math.random() * 256);
+    const randomB = Math.floor(Math.random() * 256);
+
+    e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
 }
 
 // function will create a button inside a div that resets the entire game to default number of squares
@@ -53,7 +59,6 @@ function createResetBtn() {
 
 // Reset hovered squares to default condition
 function resetGrid(e) {
-    const hoveredSquares = document.querySelectorAll('.hovered');
     //hoveredSquares.forEach((square) => square.classList.remove('hovered'));
     const squares = document.querySelectorAll('.square');
     const breaks = document.querySelectorAll('.break');
